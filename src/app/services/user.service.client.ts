@@ -20,6 +20,25 @@ export class UserServiceClient {
     });
   }
 
+  updateUser(username, firstName, lastName, phone, email, address ) {
+    const userDetails = {
+      username: username,
+      firstName: firstName,
+      lastName: lastName,
+      phone: phone,
+      email: email,
+      address: address
+    };
+    return fetch('http://localhost:4000/api/updateUser', {
+      method: 'PUT',
+      body: JSON.stringify(userDetails),
+      credentials: 'include',
+      headers: {
+        'content-type': 'application/json'
+      }
+    });
+  }
+
   logout() {
     return fetch('http://localhost:4000/api/logout', {
       method: 'post',

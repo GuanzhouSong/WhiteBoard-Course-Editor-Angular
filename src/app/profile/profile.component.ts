@@ -26,8 +26,10 @@ export class ProfileComponent implements OnInit {
   address;
   sections = [];
 
-  update(user) {
-    console.log(user);
+  update() {
+    this.service
+      .updateUser(this.username, this.firstName, this.lastName, this.phone, this.email, this.address)
+      .then(() => swal("Updated Successfully"));
   }
 
   logout() {

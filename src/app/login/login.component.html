@@ -1,17 +1,40 @@
-<div class="container-fluid">
-  <h1>Login</h1>
+<app-white-board-nav></app-white-board-nav>
 
-  <input [(ngModel)]="username"
-         placeholder="username"
-         class="form-control"/>
-  <input [(ngModel)]="password"
-         placeholder="password"
-         class="form-control"/>
-  <button (click)="login(username, password)"
-          class="btn btn-primary btn-block">
-    Login
-  </button>
+<div class="container">
+  <div class="row">
+    <div class="col-lg-3"></div>
+    <div class="col-lg-6">
+      <h1>Login</h1>
+      <div id="registerForm" class="wbdv-form">
+        <fieldset>
+          <div class="form-group usernameGrp createGrp">
+            <label for="usernameFld">Username</label>
+            <input [(ngModel)]="username" type="text" class="form-control" id="usernameFld" name="usernameFld"
+                   placeholder="Enter Username" autofocus required minlength="1" maxlength="40">
+            <div class="help-block with-errors"></div>
+          </div>
+          <div class="form-group passwordGrp createGrp">
+            <label for="passwordFld">Password</label>
+            <input [(ngModel)]="password" type="password" class="form-control" id="passwordFld" name="passwordFld"
+                   placeholder="Enter Password" required minlength="1" maxlength="40">
+            <div class="help-block with-errors"></div>
+          </div>
 
-  <a routerLink="/register">Register</a>
-  <a routerLink="/home">Home</a>
+          <button (click)="login(username, password)" class="btn btn-info btn-block wbdv-login">Login</button>
+          <div class="row">
+            <div class="col-6">
+              <a routerLink="/register" class="text-info">Register</a>
+
+            </div>
+            <div class="col-6">
+              <a routerLink="/home" class="float-right text-info">Home</a>
+            </div>
+          </div>
+        </fieldset>
+      </div>
+    </div>
+    <div class="col-lg-3"></div>
+  </div>
 </div>
+
+

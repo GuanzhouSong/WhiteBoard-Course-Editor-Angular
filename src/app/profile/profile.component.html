@@ -1,33 +1,69 @@
-<div class="container-fluid">
-  <h1>Profile</h1>
+<app-white-board-nav></app-white-board-nav>
 
-  <input [(ngModel)]="username"
-         placeholder="username"
-         class="form-control"/>
-  <input [(ngModel)]="firstName"
-         placeholder="first name"
-         class="form-control"/>
-  <input [(ngModel)]="lastName"
-         placeholder="lastName"
-         class="form-control"/>
-  <input [(ngModel)]="email"
-         placeholder="email"
-         class="form-control"/>
-  <button (click)="update()"
-          class="btn btn-primary btn-block">
-    Update
-  </button>
+<div class="container">
+  <div class="row">
 
-  <h2>Sections ({{sections.length}})</h2>
+    <div class="col-lg-6">
+      <div class="card">
+        <div class="card-body">
 
-  <ul class="list-group">
-    <li *ngFor="let enrollment of sections" class="list-group-item">
-      {{enrollment.section.name}}
-      ({{enrollment.section.seats}})
-    </li>
-  </ul>
 
-  <a (click)="logout()">Logout</a>
-  <a routerLink="/home">Home</a>
+          <h1>Profile</h1>
 
+          <form>
+            <fieldset>
+
+              <div class="form-group">
+                <label for="usernameFld">Username</label>
+                <input [(ngModel)]="username" name="username" type="username" class="form-control" id="usernameFld"
+                       placeholder="Enter Username" disabled>
+              </div>
+              <div class="form-group">
+                <label for="firstNameFld">First Name</label>
+                <input [(ngModel)]="firstName" name="firstName" type="text" class="form-control" id="firstNameFld"
+                       placeholder="First Name">
+              </div>
+              <div class="form-group">
+                <label for="lastNameFld">Last Name</label>
+                <input [(ngModel)]="lastName" name="lastName" type="text" class="form-control" id="lastNameFld" placeholder="Last Name">
+              </div>
+              <div class="form-group">
+                <label for="phoneFld">Phone</label>
+                <input [(ngModel)]="phone" name="phone" type="text" class="form-control" id="phoneFld" placeholder="Phone">
+              </div>
+              <div class="form-group">
+                <label for="emailFld">Email</label>
+                <input [(ngModel)]="email" name="email" type="email" class="form-control" id="emailFld" placeholder="Email">
+              </div>
+              <div class="form-group">
+                <label for="addressFld">Address</label>
+                <input [(ngModel)]="address" name="address" type="text" class="form-control" id="addressFld" placeholder="Address">
+              </div>
+
+
+              <button (click)="update()" class="btn btn-info" id="wbdv-updateProfile">Update Profile</button>
+            </fieldset>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-lg-6">
+      <div class="card">
+        <div class="card-body">
+          <h2>Sections ({{sections.length}})</h2>
+          <ul class="list-group">
+            <li *ngFor="let enrollment of sections" class="list-group-item">
+              {{enrollment.section.name}}
+              ({{enrollment.section.seats}})
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <a (click)="logout()">Logout</a>
+    <a >Home</a>
+
+  </div>
 </div>

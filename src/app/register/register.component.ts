@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Router} from "@angular/router";
 import {UserServiceClient} from "../services/user.service.client";
 
@@ -10,16 +10,29 @@ import {UserServiceClient} from "../services/user.service.client";
 export class RegisterComponent implements OnInit {
 
   constructor(private router: Router,
-              private service: UserServiceClient) { }
+              private service: UserServiceClient) {
+  }
 
   username;
   password;
   password2;
+
   register(username, password, password2) {
+    if (password !== password2) {
+      swal("Error!", "Password Doesnt Match", "error");
+      return;
+    }
     this.service
       .createUser(username, password)
-      .then(() =>
-        this.router.navigate(['profile']));
+      .then(response => response.json())
+      .then((myJson) => {
+        if (myJson['success'] === false) {
+          swal("Error!", myJson['message']);
+          return;
+        } else {
+          this.router.navigate(['profile']);
+        }
+      });
   }
 
   ngOnInit() {

@@ -27,6 +27,8 @@ import {UserServiceClient} from "./services/user.service.client";
 import { SectionListComponent } from './section-list/section-list.component';
 import {SectionServiceClient} from "./services/section.service.client";
 import { WhiteBoardNavComponent } from './white-board-nav/white-board-nav.component';
+import { AdminConsoleComponent } from './admin-console/admin-console.component';
+import { AdminCourseGridComponent } from './admin-console/admin-course-grid/admin-course-grid.component';
 
 @NgModule({
   declarations: [
@@ -43,7 +45,9 @@ import { WhiteBoardNavComponent } from './white-board-nav/white-board-nav.compon
     RegisterComponent,
     ProfileComponent,
     SectionListComponent,
-    WhiteBoardNavComponent
+    WhiteBoardNavComponent,
+    AdminConsoleComponent,
+    AdminCourseGridComponent
   ],
   imports: [
     BrowserModule,

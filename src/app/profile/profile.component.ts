@@ -43,6 +43,7 @@ export class ProfileComponent implements OnInit {
   ngOnInit() {
     this.service
       .profile()
+      .then(response => response.json())
       .then(user => {
           this.username = user.username;
           this.password = user.password;
@@ -52,7 +53,13 @@ export class ProfileComponent implements OnInit {
           this.phone = user.phone;
           this.address = user.address;
         }
-      );
+      )
+      .catch((error) => {
+        swal("Please Login To Continue")
+          .then(() => {
+            this.router.navigate(["login"]);
+          });
+      });
 
     this.sectionService
       .findSectionsForStudent()

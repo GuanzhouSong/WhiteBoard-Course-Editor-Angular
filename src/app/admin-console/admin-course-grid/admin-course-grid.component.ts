@@ -31,4 +31,25 @@ export class AdminCourseGridComponent implements OnInit {
       });
   }
 
+  deleteSection(course, section) {
+    this.sectionService.deleteSection(section)
+      .then(() => {
+        this.courses.map((c, i) => {
+          if (c.id === course.id) {
+            let sections = [];
+            c.sections.map(s => {
+              if (s._id === section._id) {
+                console.log("Deleting");
+              } else {
+                sections.push(s);
+              }
+            });
+            c["sections"] = sections;
+
+          }
+          return c;
+        });
+      });
+  }
+
 }

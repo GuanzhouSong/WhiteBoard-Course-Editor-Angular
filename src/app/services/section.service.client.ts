@@ -1,6 +1,7 @@
 export class SectionServiceClient {
 
-  SECTION_URL = 'http://localhost:4000/api/course/COURSEID/section';
+  COURSE_SECTION_URL = 'http://localhost:4000/api/course/COURSEID/section';
+  SECTION_URL = 'http://localhost:4000/api/section/SECTIONID';
 
   findSectionsForStudent() {
     const url = 'http://localhost:4000/api/student/section';
@@ -19,13 +20,13 @@ export class SectionServiceClient {
   }
 
   findSectionsForCourse(courseId) {
-    return fetch(this.SECTION_URL.replace('COURSEID', courseId))
+    return fetch(this.COURSE_SECTION_URL.replace('COURSEID', courseId))
       .then(response => response.json());
   }
 
   createSection(courseId, name, seats) {
     const section = {courseId, name, seats};
-    return fetch(this.SECTION_URL.replace('COURSEID', courseId), {
+    return fetch(this.COURSE_SECTION_URL.replace('COURSEID', courseId), {
       method: 'post',
       body: JSON.stringify(section),
       credentials: 'include',
@@ -34,4 +35,16 @@ export class SectionServiceClient {
       }
     });
   }
+
+  deleteSection(section) {
+    return fetch(this.SECTION_URL.replace('SECTIONID', section._id), {
+      method: 'DELETE',
+      body: JSON.stringify(section),
+      credentials: 'include',
+      headers: {
+        'content-type': 'application/json'
+      }
+    });
+  }
+
 }

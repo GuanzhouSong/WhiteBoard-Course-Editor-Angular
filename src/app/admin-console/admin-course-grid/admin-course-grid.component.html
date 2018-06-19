@@ -5,15 +5,23 @@
     <div class="card wbdv-admin-course-card">
       <div class="card-body">
         <h5 class="card-title">{{course.title}}</h5>
-        <p class="card-text">List of Sections :-</p>
+        <div class="card-text">List of Sections :-
+          <span (click)="createSection(course)" class="float-right" title="Add Section"> <i class="fa fa-plus"></i>  </span>
+        </div>
         <ul class="list-group">
           <li *ngFor="let section of course.sections" class="list-group-item">
-            {{section.name}} {{section.seats}}
+            <span [swal]="{ title: 'Enter New Section Name', input: 'text' }"
+                  (confirm)="editSection($event, 'name', section)">
+              {{section.name}}
+            </span>
+            <br/>
+            <span [swal]="{ title: 'Enter New Total Seats', input: 'number' }"
+                  (confirm)="editSection($event, 'seats', section)">Seats: {{section.seats}}</span>
             <span (click)="deleteSection(course,section)"
-                    class="float-right"><i class="fa fa-times"></i></span>
+                    class="float-right" title="Remove Section"><i class="fa fa-times"></i></span>
           </li>
         </ul>
-        <button class="btn btn-primary"> Add Section </button>
+
       </div>
     </div>
   </div>

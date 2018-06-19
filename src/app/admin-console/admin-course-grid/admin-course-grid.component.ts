@@ -1,7 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Course} from "../../models/coruse.model.client";
 import {CourseServiceClient} from "../../services/course.service.client";
 import {SectionServiceClient} from "../../services/section.service.client";
+import swal from 'sweetalert';
+
 
 @Component({
   selector: 'app-admin-course-grid',
@@ -10,11 +12,16 @@ import {SectionServiceClient} from "../../services/section.service.client";
 })
 export class AdminCourseGridComponent implements OnInit {
 
-  constructor(private service: CourseServiceClient, private sectionService: SectionServiceClient) { }
+  constructor(private service: CourseServiceClient, private sectionService: SectionServiceClient) {
+  }
 
   courses = [];
 
   ngOnInit() {
+    this.fetchCourses();
+  }
+
+  fetchCourses() {
     this.service.findAllCourses()
       .then(courses => {
         this.courses = courses;
@@ -29,6 +36,29 @@ export class AdminCourseGridComponent implements OnInit {
         });
         Promise.all(promises).then(ccc => this.courses = ccc);
       });
+  }
+
+  createSection(course) {
+    this
+      .sectionService
+      .createSection(course.id, course.title + ' Section 1', 50)
+      .then(() => {
+        this.fetchCourses();
+      });
+  }
+
+  editSection(newValue, type, section) {
+    if (type === 'name') {
+      this.sectionService.editSection(section, {name: newValue})
+        .then(() => {
+          this.fetchCourses();
+        });
+    } else if (type === 'seats') {
+      this.sectionService.editSection(section, {seats: newValue})
+        .then(() => {
+          this.fetchCourses();
+        });
+    }
   }
 
   deleteSection(course, section) {

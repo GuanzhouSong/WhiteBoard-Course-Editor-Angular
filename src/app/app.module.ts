@@ -1,7 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
-
-import { CollapseModule } from 'ngx-bootstrap/collapse';
+import { NgModule } from '@angular/core'
 import {FormsModule} from "@angular/forms";
 
 import { AppComponent } from './app.component';
@@ -29,6 +27,8 @@ import {SectionServiceClient} from "./services/section.service.client";
 import { WhiteBoardNavComponent } from './white-board-nav/white-board-nav.component';
 import { AdminConsoleComponent } from './admin-console/admin-console.component';
 import { AdminCourseGridComponent } from './admin-console/admin-course-grid/admin-course-grid.component';
+import { SweetAlert2Module } from '@toverux/ngx-sweetalert2';
+
 
 @NgModule({
   declarations: [
@@ -53,7 +53,7 @@ import { AdminCourseGridComponent } from './admin-console/admin-course-grid/admi
     BrowserModule,
     FormsModule,
     routing,
-    CollapseModule.forRoot()
+    SweetAlert2Module.forRoot()
   ],
   providers: [
     CourseNavigatorServiceClient,

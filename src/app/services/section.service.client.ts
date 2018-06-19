@@ -36,6 +36,17 @@ export class SectionServiceClient {
     });
   }
 
+  editSection(section, updateObject) {
+    return fetch(this.SECTION_URL.replace('SECTIONID', section._id), {
+      method: 'PUT',
+      body: JSON.stringify(updateObject),
+      credentials: 'include',
+      headers: {
+        'content-type': 'application/json'
+      }
+    });
+  }
+
   deleteSection(section) {
     return fetch(this.SECTION_URL.replace('SECTIONID', section._id), {
       method: 'DELETE',

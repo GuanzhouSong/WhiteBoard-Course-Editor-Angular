@@ -5,6 +5,13 @@ export class UserServiceClient {
       .then(response => response.json());
   }
 
+  getLoggedInUser() {
+    return fetch('http://localhost:4000/api/profile',
+      {
+        credentials: 'include', // include, same-origin, *omit
+      });
+  }
+
   login(username, password) {
     const credentials = {
       username: username,

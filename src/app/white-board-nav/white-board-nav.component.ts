@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {UserServiceClient} from "../services/user.service.client";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-white-board-nav',
@@ -7,15 +9,36 @@ import { Component, OnInit } from '@angular/core';
 })
 export class WhiteBoardNavComponent implements OnInit {
 
-  constructor() { }
-
-  isCollapsed = false;
-
-  ngOnInit() {
+  constructor(private service: UserServiceClient,
+              private router: Router) {
   }
 
+  isCollapsed = false;
+  isLoggedIn = false;
+  isAdmin = false;
+  user;
 
+  ngOnInit() {
+    this.service.profile()
+      .then(response => response.json())
+      .then((data) => {
+        if (data._id) {
+          this.isLoggedIn = true;
+          if(data.username === 'admin') {
+            this.isAdmin = true;
+          }
+        }
+      })
+      .catch((error) => {
+        this.isLoggedIn = false;
+      });
+  }
 
-
+  logout() {
+    this.service
+      .logout()
+      .then(() =>
+        this.router.navigate(['login']));
+  }
 
 }

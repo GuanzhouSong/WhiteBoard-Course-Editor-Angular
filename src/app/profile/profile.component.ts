@@ -3,6 +3,7 @@ import {User} from "../models/user.model.client";
 import {UserServiceClient} from "../services/user.service.client";
 import {Router} from "@angular/router";
 import {SectionServiceClient} from "../services/section.service.client";
+import {CourseServiceClient} from "../services/course.service.client";
 
 @Component({
   selector: 'app-profile',
@@ -12,7 +13,7 @@ import {SectionServiceClient} from "../services/section.service.client";
 export class ProfileComponent implements OnInit {
 
   constructor(private service: UserServiceClient,
-              private sectionService: SectionServiceClient,
+              private sectionService: SectionServiceClient, private courseService: CourseServiceClient,
               private router: Router) {
   }
 
@@ -24,7 +25,15 @@ export class ProfileComponent implements OnInit {
   phone;
   email;
   address;
-  sections = [];
+  courses = [];
+  studentSections = [];
+  studentCourses = [];
+
+  uniqEs6 = (arrArg) => {
+    return arrArg.filter((elem, pos, arr) => {
+      return arr.indexOf(elem) == pos;
+    });
+  };
 
   update() {
     this.service
@@ -60,11 +69,26 @@ export class ProfileComponent implements OnInit {
           });
       });
 
-    this.sectionService
-      .findSectionsForStudent()
-      .then(sections => {
-        this.sections = sections;
-        console.log(this.sections);
+    this.courseService.findAllCourses()
+      .then(courses => {
+        this.courses = courses;
+      })
+      .then(() => {
+        this.sectionService
+          .findSectionsForStudent()
+          .then(studentSections => {
+            this.studentSections = studentSections;
+            var c,s;
+            for (c = 0; c < this.courses.length; c++) {
+              for (s = 0; s < this.studentSections.length; s++) {
+                if (this.courses[c]['id'] === this.studentSections[s]['courseId']) {
+
+                  this.studentCourses.push(this.courses[c]);
+                }
+              }
+            }
+            this.studentCourses = this.uniqEs6(this.studentCourses);
+          });
       });
   }
 

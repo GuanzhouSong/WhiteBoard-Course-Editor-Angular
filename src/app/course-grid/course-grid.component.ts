@@ -25,7 +25,7 @@ export class CourseGridComponent implements OnInit {
     return arrArg.filter((elem, pos, arr) => {
       return arr.indexOf(elem) == pos;
     });
-  }
+  };
 
   ngOnInit() {
     this.service.profile()

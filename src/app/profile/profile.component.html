@@ -51,12 +51,27 @@
     </div>
 
     <div class="col-lg-6">
+
       <div class="card">
         <div class="card-body">
-          <h2>Sections ({{sections.length}})</h2>
+          <h2>Sections ({{studentSections.length}})</h2>
           <ul class="list-group">
-            <li *ngFor="let s of sections" class="list-group-item">
+            <li *ngFor="let s of studentSections" class="list-group-item">
               {{s.name}}
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="card" style="margin-top: 10px;">
+        <div class="card-body">
+          <h2>Courses ({{studentCourses.length}})</h2>
+          <ul class="list-group">
+            <li *ngFor="let course of studentCourses" class="list-group-item">
+              <a routerLink="/course/{{course.id}}"
+                 >
+                {{course.title}}
+              </a>
             </li>
           </ul>
         </div>

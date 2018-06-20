@@ -22,7 +22,7 @@
     "@angular/platform-browser-dynamic": "^4.2.4",
     "@angular/router": "^4.2.4",
     "@savantly/ngx-inline-edit": "^0.3.0",
-    "@toverux/ngx-sweetalert2": "^4.0.0",
+    "@toverux/ngx-sweetalert2": "^3.0.1",
     "@types/sweetalert": "^2.0.4",
     "core-js": "^2.4.1",
     "rxjs": "^5.4.2",

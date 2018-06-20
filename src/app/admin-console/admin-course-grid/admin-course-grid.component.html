@@ -16,7 +16,7 @@
             </span>
             <br/>
             <span [swal]="{ title: 'Enter New Total Seats', input: 'number' }"
-                  (confirm)="editSection($event, 'seats', section)">Seats: {{section.seats}}</span>
+                  (confirm)="editSection($event, 'seats', section)">Total Seats: {{section.seats}}</span>
             <span (click)="deleteSection(course,section)"
                     class="float-right" title="Remove Section"><i class="fa fa-times"></i></span>
           </li>

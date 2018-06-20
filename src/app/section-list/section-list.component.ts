@@ -102,7 +102,7 @@ export class SectionListComponent implements OnInit {
   containsObject(obj, list) {
     var x;
     for (x in list) {
-      if (list[x]['section']['_id'] === obj['_id']) {
+      if (list[x]['_id'] === obj['_id']) {
         return true;
       }
     }

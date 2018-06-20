@@ -1,18 +1,19 @@
 export class SectionServiceClient {
 
-  COURSE_SECTION_URL = 'http://localhost:4000/api/course/COURSEID/section';
-  SECTION_URL = 'http://localhost:4000/api/section/SECTIONID';
+  API_DOMAIN = 'http://localhost:4000';
+  COURSE_SECTION_URL = this.API_DOMAIN + '/api/course/COURSEID/section';
+  SECTION_URL = this.API_DOMAIN + '/api/section/SECTIONID';
 
   findSectionsForStudent() {
-    const url = 'http://localhost:4000/api/student/section';
+    const url = this.API_DOMAIN + '/api/student/section';
     return fetch(url, {
       credentials: 'include'
     })
       .then(response => response.json());
   }
 
-  enrollStudentInSection(sectionId) {
-    const url = 'http://localhost:4000/api/section/' + sectionId + '/enrollment';
+  enrollStudentInSection(studentId, sectionId) {
+    const url = this.API_DOMAIN + '/api/student/' + studentId + '/section/' + sectionId;
     return fetch(url, {
       method: 'post',
       credentials: 'include'
@@ -25,7 +26,7 @@ export class SectionServiceClient {
   }
 
   createSection(courseId, name, seats) {
-    const section = {courseId, name, seats};
+    const section = {courseId, name, seats, 'usedSeats': 0};
     return fetch(this.COURSE_SECTION_URL.replace('COURSEID', courseId), {
       method: 'post',
       body: JSON.stringify(section),

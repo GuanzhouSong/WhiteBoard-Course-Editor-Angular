@@ -23,6 +23,7 @@ export class WhiteBoardNavComponent implements OnInit {
       .then(response => response.json())
       .then((data) => {
         if (data._id) {
+          this.user = data;
           this.isLoggedIn = true;
           if(data.username === 'admin') {
             this.isAdmin = true;

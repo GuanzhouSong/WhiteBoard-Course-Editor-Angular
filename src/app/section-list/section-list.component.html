@@ -3,10 +3,12 @@
 <div class="container">
   <h1>Sections for Course: {{courseId}}</h1>
   <ul class="list-group">
-    <li [hidden]="section.hide" *ngFor="let section of sections" class="list-group-item">
+    <li  *ngFor="let section of sections" class="list-group-item">
       {{section.name}} <br/> Section Size : {{section.usedSeats}} / {{section.seats}}
-      <button (click)="enroll(section)"
+      <button [hidden]="section.enrolled || section.sectionFull || isAdmin" (click)="enroll(section)"
               class="float-right btn btn-primary">Enroll</button>
+      <button [hidden]="!section.enrolled || isAdmin" (click)="unenroll(section)"
+              class="float-right btn btn-primary">Unenroll</button>
     </li>
   </ul>
 

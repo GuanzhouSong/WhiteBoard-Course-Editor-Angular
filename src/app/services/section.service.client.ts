@@ -15,7 +15,16 @@ export class SectionServiceClient {
   enrollStudentInSection(studentId, sectionId) {
     const url = this.API_DOMAIN + '/api/student/' + studentId + '/section/' + sectionId;
     return fetch(url, {
-      method: 'post',
+      method: 'POST',
+      credentials: 'include'
+    });
+  }
+
+  unenrollStudentInSection(studentId, sectionId) {
+    console.log("Unenrolling");
+    const url = this.API_DOMAIN + '/api/student/' + studentId + '/section/' + sectionId;
+    return fetch(url, {
+      method: 'DELETE',
       credentials: 'include'
     });
   }

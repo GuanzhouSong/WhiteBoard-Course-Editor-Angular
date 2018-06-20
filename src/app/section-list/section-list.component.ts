@@ -32,11 +32,21 @@ export class SectionListComponent implements OnInit {
     this.sectionService
       .enrollStudentInSection(this.user._id, section._id)
       .then(() => {
-        this.router.navigate(['profile']);
+        this.display();
+        /*this.router.navigate(['profile']);*/
       });
   }
 
-  ngOnInit() {
+  unenroll(section) {
+    this.sectionService
+      .unenrollStudentInSection(this.user._id, section._id)
+      .then(() => {
+        this.display();
+        /*this.router.navigate(['profile']);*/
+      });
+  }
+
+  display() {
     this.service.profile()
       .then(response => response.json())
       .then((data) => {
@@ -56,12 +66,20 @@ export class SectionListComponent implements OnInit {
                 .then(sections => {
                   this.sections = sections;
                   this.sections.map(s => {
-                    if (this.containsObject(s, this.sections)) {
-                      s['hide'] = true;
+
+                    if (s.seats === s.usedSeats){
+                      s.sectionFull = true;
                     } else {
-                      s['hide'] = false;
+                      s.sectionFull = false;
                     }
-                    console.log(this.sections);
+
+                    if (this.containsObject(s, this.loggedInUsersSections)) {
+                      console.log("it contains : true");
+                      s['enrolled'] = true;
+                    } else {
+                      console.log("it doesnt contain : false");
+                      s['enrolled'] = false;
+                    }
                   });
                 });
             });
@@ -77,10 +95,14 @@ export class SectionListComponent implements OnInit {
       });
   }
 
+  ngOnInit() {
+    this.display();
+  }
+
   containsObject(obj, list) {
     var x;
     for (x in list) {
-      if (list.hasOwnProperty(x) && list[x] === obj) {
+      if (list[x]['section']['_id'] === obj['_id']) {
         return true;
       }
     }

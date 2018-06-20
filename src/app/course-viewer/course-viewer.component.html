@@ -1,4 +1,18 @@
 <div class="container-fluid">
-  <h2>{{course.title}}</h2>
-  <app-module-list></app-module-list>
+  <div class="row wbdv-100vh">
+    <div class="col-lg-3 wbdv-module-panel">
+      <div class="wbdv-top-bar">
+        <nav class="navbar navbar-dark navbar-dark-clr">
+          <span class="navbar-brand">
+            <a class="text-white" routerLink="/"><i class="fa fa-times wbdv-close-editor"></i></a>
+            <span>{{course.title}}</span>
+          </span>
+        </nav>
+      </div>
+      <app-module-list></app-module-list>
+    </div>
+    <div class="col-lg-9 wbdv-lesson-panel">
+      <app-lesson-tabs></app-lesson-tabs>
+    </div>
+  </div>
 </div>

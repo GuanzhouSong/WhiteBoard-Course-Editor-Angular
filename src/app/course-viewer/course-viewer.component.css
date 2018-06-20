@@ -1,0 +1,22 @@
+.wbdv-100vh {
+  min-height: 100vh;
+}
+
+.wbdv-module-panel {
+  background-color: #363b3e;
+  padding: 0px 0px !important;
+}
+
+.wbdv-top-bar {
+  background-color: #363b3e;
+  padding: 0px 0px;
+  color: #fff;
+  width: 100vw;
+  overflow: hidden;
+}
+
+.navbar-dark-clr {
+  background-color: #454b4f !important;
+  min-height: 60px;
+}
+

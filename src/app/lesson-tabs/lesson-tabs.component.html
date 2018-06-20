@@ -1,7 +1,7 @@
-<ul class="nav nav-tabs">
+<ul class="nav navbar-dark navbar-dark-clr nav-pills">
   <li *ngFor="let lesson of lessons"
       class="nav-item">
-    <a class="nav-link"
+    <a class="nav-link text-white wbdv-topic"
        [ngClass]="{'active': lesson.id == lessonId}"
        routerLink="/course/{{courseId}}/module/{{moduleId}}/lesson/{{lesson.id}}">
       {{lesson.title}}
@@ -9,4 +9,4 @@
   </li>
 </ul>
 
-<app-widget-list></app-widget-list>
+<app-topic-tabs></app-topic-tabs>

@@ -18,11 +18,13 @@ export class WidgetListComponent implements OnInit {
   widgets = [];
   setContext(params) {
     this.context = params;
-    this.loadWidgets(params.lessonId);
+    this.loadWidgets(params.topicId);
   }
-  loadWidgets(lessonId) {
-    this.service.findWidgetsForLesson(lessonId)
-      .then(widgets => this.widgets = widgets);
+  loadWidgets(topicId) {
+    if(topicId !== undefined) {
+      this.service.findWidgetsForTopic(topicId)
+        .then(widgets => this.widgets = widgets);
+    }
   }
 
   ngOnInit() {

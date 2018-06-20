@@ -16,6 +16,8 @@ import { ModuleListComponent } from './module-list/module-list.component';
 import {ModuleServiceClient} from "./services/module.service.client";
 import { LessonTabsComponent } from './lesson-tabs/lesson-tabs.component';
 import {LessonServiceClient} from "./services/lesson.service.client";
+import { TopicTabsComponent } from './topic-tabs/topic-tabs.component';
+import {TopicServiceClient} from "./services/topic.service.client";
 import { WidgetListComponent } from './widget-list/widget-list.component';
 import {WidgetServiceClient} from "./services/widget.service.client";
 import { LoginComponent } from './login/login.component';
@@ -28,6 +30,7 @@ import { WhiteBoardNavComponent } from './white-board-nav/white-board-nav.compon
 import { AdminConsoleComponent } from './admin-console/admin-console.component';
 import { AdminCourseGridComponent } from './admin-console/admin-course-grid/admin-course-grid.component';
 import { SweetAlert2Module } from '@toverux/ngx-sweetalert2';
+
 
 
 @NgModule({
@@ -47,7 +50,8 @@ import { SweetAlert2Module } from '@toverux/ngx-sweetalert2';
     SectionListComponent,
     WhiteBoardNavComponent,
     AdminConsoleComponent,
-    AdminCourseGridComponent
+    AdminCourseGridComponent,
+    TopicTabsComponent
   ],
   imports: [
     BrowserModule,
@@ -60,6 +64,7 @@ import { SweetAlert2Module } from '@toverux/ngx-sweetalert2';
     CourseServiceClient,
     ModuleServiceClient,
     LessonServiceClient,
+    TopicServiceClient,
     WidgetServiceClient,
     UserServiceClient,
     SectionServiceClient

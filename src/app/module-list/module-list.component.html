@@ -1,16 +1,16 @@
 
-<div class="row">
-  <div class="col-4">
-    <ul class="list-group">
-      <li class="list-group-item active">Modules</li>
-      <li [ngClass]="{'active': module.id == moduleId}" *ngFor="let module of modules"
-          class="list-group-item wbdv">
-        <a routerLink="/course/{{courseId}}/module/{{module.id}}">
-          {{module.title}}</a>
-      </li>
+<div class="container wbdv-margin-top-20">
+  <div class="col-12">
+    <ul class="list-group wbdv-module-list fill">
+      <div class="row">
+        <div class="col-12">
+          <li [ngClass]="{'active': module.id == moduleId}" *ngFor="let module of modules"
+              class="list-group-item wbdv wbdv-module-list-item">
+            <a class="wbdv-module-link" routerLink="/course/{{courseId}}/module/{{module.id}}">
+              {{module.title}}</a>
+          </li>
+        </div>
+      </div>
     </ul>
-  </div>
-  <div class="col-8">
-    <app-lesson-tabs></app-lesson-tabs>
   </div>
 </div>

@@ -54,6 +54,9 @@ export class ProfileComponent implements OnInit {
       .profile()
       .then(response => response.json())
       .then(user => {
+          if (user['success'] === false) {
+            this.router.navigate(['login']);
+          }
           this.username = user.username;
           this.password = user.password;
           this.firstName = user.firstName;
@@ -66,38 +69,29 @@ export class ProfileComponent implements OnInit {
             this.isAdmin = true;
           }
         }
-      )
-      .catch((error) => {
-        swal("Please Login To Continue")
-          .then(() => {
-            this.router.navigate(["login"]);
-          });
-      });
+      );
 
-    if (this.username !== undefined) {
-      this.courseService.findAllCourses()
-        .then(courses => {
-          this.courses = courses;
-        })
-        .then(() => {
-          this.sectionService
-            .findSectionsForStudent()
-            .then(studentSections => {
-              this.studentSections = studentSections;
-              var c, s;
-              for (c = 0; c < this.courses.length; c++) {
-                for (s = 0; s < this.studentSections.length; s++) {
-                  if (this.courses[c]['id'] === this.studentSections[s]['courseId']) {
+    this.courseService.findAllCourses()
+      .then(courses => {
+        this.courses = courses;
+      })
+      .then(() => {
+        this.sectionService
+          .findSectionsForStudent()
+          .then(studentSections => {
+            this.studentSections = studentSections;
+            var c, s;
+            for (c = 0; c < this.courses.length; c++) {
+              for (s = 0; s < this.studentSections.length; s++) {
+                if (this.courses[c]['id'] === this.studentSections[s]['courseId']) {
 
-                    this.studentCourses.push(this.courses[c]);
-                  }
+                  this.studentCourses.push(this.courses[c]);
                 }
               }
-              this.studentCourses = this.uniqEs6(this.studentCourses);
-            });
-        });
-    }
-
+            }
+            this.studentCourses = this.uniqEs6(this.studentCourses);
+          });
+      });
   }
 
 }

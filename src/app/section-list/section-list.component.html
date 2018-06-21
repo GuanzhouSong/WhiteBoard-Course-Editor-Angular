@@ -8,7 +8,7 @@
       <button [hidden]="section.enrolled || section.sectionFull || isAdmin" (click)="enroll(section)"
               class="float-right btn btn-primary">Enroll</button>
       <button [hidden]="!section.enrolled || isAdmin" (click)="unenroll(section)"
-              class="float-right btn btn-primary">Unenroll</button>
+              class="float-right btn btn-danger">Unenroll</button>
     </li>
   </ul>
 

@@ -23,7 +23,7 @@ export class CourseGridComponent implements OnInit {
 
   uniqEs6 = (arrArg) => {
     return arrArg.filter((elem, pos, arr) => {
-      return arr.indexOf(elem) == pos;
+      return arr.indexOf(elem) === pos;
     });
   };
 
@@ -47,21 +47,23 @@ export class CourseGridComponent implements OnInit {
         this.courses = courses;
       })
       .then(() => {
-        this.sectionService
-          .findSectionsForStudent()
-          .then(studentSections => {
-            this.studentSections = studentSections;
-            var c,s;
-            for (c = 0; c < this.courses.length; c++) {
-              for (s = 0; s < this.studentSections.length; s++) {
-                if (this.courses[c]['id'] === this.studentSections[s]['courseId']) {
+        if (this.user !== undefined) {
+          this.sectionService
+            .findSectionsForStudent()
+            .then(studentSections => {
+              this.studentSections = studentSections;
+              var c, s;
+              for (c = 0; c < this.courses.length; c++) {
+                for (s = 0; s < this.studentSections.length; s++) {
+                  if (this.courses[c]['id'] === this.studentSections[s]['courseId']) {
 
-                  this.studentCourses.push(this.courses[c]);
+                    this.studentCourses.push(this.courses[c]);
+                  }
                 }
               }
-            }
-            this.studentCourses = this.uniqEs6(this.studentCourses);
-          });
+              this.studentCourses = this.uniqEs6(this.studentCourses);
+            });
+        }
       });
   }
 

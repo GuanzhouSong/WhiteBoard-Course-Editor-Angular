@@ -25,6 +25,7 @@ export class ProfileComponent implements OnInit {
   phone;
   email;
   address;
+  isAdmin = false;
   courses = [];
   studentSections = [];
   studentCourses = [];
@@ -60,6 +61,10 @@ export class ProfileComponent implements OnInit {
           this.email = user.email;
           this.phone = user.phone;
           this.address = user.address;
+
+          if (this.username === 'admin') {
+            this.isAdmin = true;
+          }
         }
       )
       .catch((error) => {
@@ -69,27 +74,30 @@ export class ProfileComponent implements OnInit {
           });
       });
 
-    this.courseService.findAllCourses()
-      .then(courses => {
-        this.courses = courses;
-      })
-      .then(() => {
-        this.sectionService
-          .findSectionsForStudent()
-          .then(studentSections => {
-            this.studentSections = studentSections;
-            var c,s;
-            for (c = 0; c < this.courses.length; c++) {
-              for (s = 0; s < this.studentSections.length; s++) {
-                if (this.courses[c]['id'] === this.studentSections[s]['courseId']) {
+    if (this.username !== undefined) {
+      this.courseService.findAllCourses()
+        .then(courses => {
+          this.courses = courses;
+        })
+        .then(() => {
+          this.sectionService
+            .findSectionsForStudent()
+            .then(studentSections => {
+              this.studentSections = studentSections;
+              var c, s;
+              for (c = 0; c < this.courses.length; c++) {
+                for (s = 0; s < this.studentSections.length; s++) {
+                  if (this.courses[c]['id'] === this.studentSections[s]['courseId']) {
 
-                  this.studentCourses.push(this.courses[c]);
+                    this.studentCourses.push(this.courses[c]);
+                  }
                 }
               }
-            }
-            this.studentCourses = this.uniqEs6(this.studentCourses);
-          });
-      });
+              this.studentCourses = this.uniqEs6(this.studentCourses);
+            });
+        });
+    }
+
   }
 
 }

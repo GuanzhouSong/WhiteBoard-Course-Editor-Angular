@@ -54,7 +54,7 @@ export class ProfileComponent implements OnInit {
       .profile()
       .then(response => response.json())
       .then(user => {
-          if (user['success'] === false) {
+          if(user['success'] === false) {
             this.router.navigate(['login']);
           }
           this.username = user.username;

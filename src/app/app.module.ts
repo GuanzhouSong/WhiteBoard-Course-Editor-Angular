@@ -32,6 +32,7 @@ import {AdminCourseGridComponent} from './admin-console/admin-course-grid/admin-
 import {SweetAlert2Module} from '@toverux/ngx-sweetalert2';
 import { FormListComponent } from './form-list/form-list.component';
 import {FormWidgetServiceClient} from "./services/formWidget.service.client";
+import { FormViewerComponent } from './form-viewer/form-viewer.component';
 
 
 @NgModule({
@@ -53,7 +54,8 @@ import {FormWidgetServiceClient} from "./services/formWidget.service.client";
     AdminConsoleComponent,
     AdminCourseGridComponent,
     TopicTabsComponent,
-    FormListComponent
+    FormListComponent,
+    FormViewerComponent
   ],
   imports: [
     BrowserModule,

@@ -27,5 +27,11 @@
     <div *ngSwitchCase="'Paragraph'">
       <p>{{widget.text}}</p>
     </div>
+    <div *ngSwitchCase="'Form'">
+      <a routerLink="/form/{{widget.id}}">Open Form</a>
+    </div>
+    <div *ngSwitchCase="'Quiz'">
+      <p>Not Yet Supported!</p>
+    </div>
   </div>
 </div>

@@ -1,0 +1,10 @@
+<app-white-board-nav></app-white-board-nav>
+
+<div class="container">
+  <h1>List of Submissions :-</h1>
+  <ul class="list-group">
+    <li *ngFor="let subs of submissions; index as i" [attr.data-index]="i" class="list-group-item">
+      <a routerLink="/form/{{formId}}/submission/{{subs._id}}">Submission {{i+1}} - By {{subs.username}}</a>
+    </li>
+  </ul>
+</div>

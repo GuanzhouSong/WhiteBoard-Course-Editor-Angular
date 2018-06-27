@@ -1,9 +1,10 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, ElementRef, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
 import {FormWidgetServiceClient} from "../services/formWidget.service.client";
 import {User} from "../models/user.model.client";
 import {UserServiceClient} from "../services/user.service.client";
 import {SubmissionServiceClient} from "../services/submission.service.client";
+import insertCss from "insert-css";
 
 @Component({
   selector: 'app-form-viewer',
@@ -16,7 +17,8 @@ export class FormViewerComponent implements OnInit {
               private userService: UserServiceClient,
               private service: FormWidgetServiceClient,
               private route: ActivatedRoute,
-              private router: Router) {
+              private router: Router,
+              private el: ElementRef) {
     this.route.params.subscribe((params) => this.setParams(params));
   }
 
@@ -24,7 +26,8 @@ export class FormViewerComponent implements OnInit {
   topicId = -1;
   submission = [];
   username = -1;
-  counter=0;
+  counter = 0;
+
 
   setParams(params) {
     this.userService
@@ -44,6 +47,7 @@ export class FormViewerComponent implements OnInit {
         this.topicId = form.topic.id;
         this.submission = form.elements;
         this.submission = this.submission.map((element, index) => {
+          insertCss(element.cssStyle);
           element['sAnswer'] = '';
           element['sAnswerList'] = [];
           return element;
@@ -53,6 +57,7 @@ export class FormViewerComponent implements OnInit {
   }
 
   ngOnInit() {
+
   }
 
 
@@ -74,7 +79,7 @@ export class FormViewerComponent implements OnInit {
     this.router.navigate(['forms']);
   }
 
-  changeAnswer(ev,el) {
+  changeAnswer(ev, el) {
     this.submission.map(element => {
       if (element.id === el.id) {
         element.sAnswer = ev.target.value;
@@ -86,7 +91,7 @@ export class FormViewerComponent implements OnInit {
   changeAnswerList(ev, el, opt) {
     this.submission.map(element => {
       if (element.id === el.id) {
-        if(ev.target.checked) {
+        if (ev.target.checked) {
           element.sAnswerList.push(opt);
         } else {
           element.sAnswerList = element.sAnswerList.filter(e => e !== opt);

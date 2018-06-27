@@ -1,0 +1,9 @@
+<app-white-board-nav></app-white-board-nav>
+
+<div class="container">
+    <ul class="list-group">
+      <li *ngFor="let form of forms" class="list-group-item">
+        <a routerLink="/form/{{form.id}}">{{form.name}}</a>
+      </li>
+    </ul>
+</div>

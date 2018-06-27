@@ -8,6 +8,8 @@ import {SectionListComponent} from "./section-list/section-list.component";
 import {AdminConsoleComponent} from "./admin-console/admin-console.component";
 import {FormListComponent} from "./form-list/form-list.component";
 import {FormViewerComponent} from "./form-viewer/form-viewer.component";
+import {SubmissionListComponent} from "./submission-list/submission-list.component";
+import {SubmissionViewerComponent} from "./submission-viewer/submission-viewer.component";
 
 const appRoutes: Routes = [
   {path: '', redirectTo: 'home', pathMatch: 'full'},
@@ -18,6 +20,8 @@ const appRoutes: Routes = [
   {path: 'admin-console', component: AdminConsoleComponent},
   {path: 'forms', component: FormListComponent},
   {path: 'form/:formId', component: FormViewerComponent},
+  {path: 'form/:formId/submissions', component: SubmissionListComponent},
+  {path: 'form/:formId/submission/:submissionId', component: SubmissionViewerComponent},
   {path: 'course/:courseId', component: CourseViewerComponent},
   {path: 'course/:courseId/section', component: SectionListComponent},
   {path: 'course/:courseId/module/:moduleId', component: CourseViewerComponent},

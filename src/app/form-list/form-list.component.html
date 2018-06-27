@@ -4,6 +4,8 @@
     <ul class="list-group">
       <li *ngFor="let form of forms" class="list-group-item">
         <a routerLink="/form/{{form.id}}">{{form.name}}</a>
+        <a routerLink="/form/{{form.id}}/submissions"><button class="btn btn-primary float-right">Submissions List</button></a>
+        <a routerLink="/form/{{form.id}}"><button class="btn btn-info float-right">New Submission</button></a>
       </li>
     </ul>
 </div>

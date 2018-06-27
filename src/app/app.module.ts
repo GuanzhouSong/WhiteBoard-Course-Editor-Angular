@@ -33,6 +33,9 @@ import {SweetAlert2Module} from '@toverux/ngx-sweetalert2';
 import { FormListComponent } from './form-list/form-list.component';
 import {FormWidgetServiceClient} from "./services/formWidget.service.client";
 import { FormViewerComponent } from './form-viewer/form-viewer.component';
+import {SubmissionServiceClient} from "./services/submission.service.client";
+import { SubmissionListComponent } from './submission-list/submission-list.component';
+import { SubmissionViewerComponent } from './submission-viewer/submission-viewer.component';
 
 
 @NgModule({
@@ -55,7 +58,9 @@ import { FormViewerComponent } from './form-viewer/form-viewer.component';
     AdminCourseGridComponent,
     TopicTabsComponent,
     FormListComponent,
-    FormViewerComponent
+    FormViewerComponent,
+    SubmissionListComponent,
+    SubmissionViewerComponent
   ],
   imports: [
     BrowserModule,
@@ -72,7 +77,8 @@ import { FormViewerComponent } from './form-viewer/form-viewer.component';
     WidgetServiceClient,
     UserServiceClient,
     SectionServiceClient,
-    FormWidgetServiceClient
+    FormWidgetServiceClient,
+    SubmissionServiceClient
   ],
   bootstrap: [AppComponent]
 })

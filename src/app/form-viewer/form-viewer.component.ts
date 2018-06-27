@@ -1,6 +1,8 @@
 import {Component, OnInit} from '@angular/core';
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {FormWidgetServiceClient} from "../services/formWidget.service.client";
+import {User} from "../models/user.model.client";
+import {UserServiceClient} from "../services/user.service.client";
 
 @Component({
   selector: 'app-form-viewer',
@@ -9,16 +11,29 @@ import {FormWidgetServiceClient} from "../services/formWidget.service.client";
 })
 export class FormViewerComponent implements OnInit {
 
-  constructor(private service: FormWidgetServiceClient, private route: ActivatedRoute) {
+  constructor(private userService: UserServiceClient, private service: FormWidgetServiceClient, private route: ActivatedRoute, private router: Router) {
     this.route.params.subscribe((params) => this.setParams(params));
   }
 
   form = {id: -1, elements: []};
   topicId = -1;
   submission = [];
+  username = -1;
+  counter=0;
 
   setParams(params) {
-    this.service.findFormWidgetById(params['formId'])
+    this.userService
+      .profile()
+      .then(response => response.json())
+      .then(user => {
+        if (user['success'] === false) {
+          this.router.navigate(['login']);
+        }
+        this.username = user.username;
+      })
+      .then(() => {
+        return this.service.findFormWidgetById(params['formId']);
+      })
       .then(form => {
         this.form = form;
         this.topicId = form.topic.id;
@@ -34,6 +49,7 @@ export class FormViewerComponent implements OnInit {
 
   ngOnInit() {
   }
+
 
   splitter(element) {
     return element.options.split(/(?!\(.*)\n(?![^\[]*?\])/g);

@@ -46,7 +46,10 @@ export class SubmissionViewerComponent implements OnInit {
       .then(() => {
         return this.formService.findFormWidgetById(this.formId);
       })
-      .then(form => this.form = form);
+      .then(form => {
+        this.form = form;
+        console.log(this.form);
+      });
   }
 
   ngOnInit() {

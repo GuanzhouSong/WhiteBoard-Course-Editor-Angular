@@ -66,13 +66,13 @@ export class FormViewerComponent implements OnInit {
   }
 
   submitForm() {
+    console.log(this.submission);
     this.submissionService.createSubmission(this.username, this.submission, this.form.id)
       .then(() => {
         alert("Submitted");
         this.router.navigate(['forms']);
       })
       .catch(() => alert("Request Failed to Mongo Server"));
-    console.log(this.submission);
   }
 
   cancelForm() {
@@ -83,6 +83,25 @@ export class FormViewerComponent implements OnInit {
     this.submission.map(element => {
       if (element.id === el.id) {
         element.sAnswer = ev.target.value;
+      }
+      return element;
+    });
+  }
+
+  changeAnswerListForSelect(ev, el) {
+    let opt;
+    this.submission.map(element => {
+      if (element.id === el.id) {
+        element.sAnswerList= [];
+        const len = ev.target.options.length;
+        for (var i = 0; i < len; i++) {
+          opt = ev.target.options[i];
+          if (opt.selected) {
+            element.sAnswerList.push(parseInt(opt.value));
+          } else {
+            element.sAnswerList = element.sAnswerList.filter(e => e !== opt);
+          }
+        }
       }
       return element;
     });

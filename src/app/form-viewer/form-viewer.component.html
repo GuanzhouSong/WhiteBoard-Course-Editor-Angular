@@ -11,7 +11,7 @@
 
 
           <div *ngSwitchCase="'INPUT'">
-            <div class="form-group {{(element.labelDirection === 'Horizontal' ? 'row wbdv-row' : '')}}">
+            <div class="form-group {{(element.labelDirection === 'Horizontal' ? 'row wbdv-row' : '')}}" id="T{{topicId}}Elem{{element.orderno}}Box">
               <label class="col-sm-2 col-form-label"
                      id="T{{topicId}}Elem{{element.orderno}}Label">{{element.label}}</label>
               <div class="col-sm-10">
@@ -27,7 +27,7 @@
 
 
           <div *ngSwitchCase="'CHECKBOX'">
-            <div class="form-group {{(element.labelDirection === 'Horizontal' ? 'row wbdv-row' : '')}}">
+            <div class="form-group {{(element.labelDirection === 'Horizontal' ? 'row wbdv-row' : '')}}"  id="T{{topicId}}Elem{{element.orderno}}Box">
               <label class="col-sm-2 col-form-label"
                      id="T{{topicId}}Elem{{element.orderno}}Label">{{element.label}}</label>
               <div class="col-sm-10">
@@ -49,7 +49,7 @@
 
 
           <div *ngSwitchCase="'RADIO'">
-            <div class="form-group {{(element.labelDirection === 'Horizontal' ? 'row wbdv-row' : '')}}">
+            <div class="form-group {{(element.labelDirection === 'Horizontal' ? 'row wbdv-row' : '')}}"  id="T{{topicId}}Elem{{element.orderno}}Box">
               <label class="col-sm-2 col-form-label"
                      id="T{{topicId}}Elem{{element.orderno}}Label">{{element.label}}</label>
               <div class="col-sm-10">
@@ -71,19 +71,14 @@
 
 
           <div *ngSwitchCase="'SELECT'">
-            <div class="form-group {{(element.labelDirection === 'Horizontal' ? 'row wbdv-row' : '')}}">
+            <div class="form-group {{(element.labelDirection === 'Horizontal' ? 'row wbdv-row' : '')}}"  id="T{{topicId}}Elem{{element.orderno}}Box">
               <label class="col-sm-2 col-form-label"
                      id="T{{topicId}}Elem{{element.orderno}}Label">{{element.label}}</label>
               <div class="col-sm-10">
-                <select multiple>
-                <div *ngFor="let line of splitter(element); let i = index; " className="form-check">
-                  <optgroup *ngIf="line.substr(0, 1) == '[' && line.slice(-1) == ']'">
-                    <option value={{line}}>{{line}}</option>
-                  </optgroup>
-                  <option *ngIf="!(line.substr(0, 1) == '[' && line.slice(-1) == ']');" value={{line}} >
+                <select multiple (change)="changeAnswerListForSelect($event, element)" >
+                  <option *ngFor="let line of splitter(element); let i = index;" value={{i}} >
                     {{line}}
                   </option>
-                </div>
                 </select>
               </div>
             </div>
@@ -91,7 +86,7 @@
 
 
           <div *ngSwitchCase="'TEXTAREA'">
-            <div class="form-group {{(element.labelDirection === 'Horizontal' ? 'row wbdv-row' : '')}}">
+            <div class="form-group {{(element.labelDirection === 'Horizontal' ? 'row wbdv-row' : '')}}" id="T{{topicId}}Elem{{element.orderno}}Box">
               <label class="col-sm-2 col-form-label"
                      id="T{{topicId}}Elem{{element.orderno}}Label">{{element.label}}</label>
               <div class="col-sm-10">
@@ -107,6 +102,7 @@
 
 
         </div>
+        <div onload="insertCss(element.cssStyle)"></div>
       </div>
       <button class="btn btn-primary" (click)="submitForm()">Submit</button> <button class="btn btn-danger" (click)="cancelForm()">Cancel</button>
 

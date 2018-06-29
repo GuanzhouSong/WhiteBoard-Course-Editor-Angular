@@ -30,11 +30,27 @@
           <label class="col-sm-2 col-form-label"
                  id="T{{topicId}}Elem{{element.orderno}}Label">{{element.label}}</label>
           <div class="col-sm-10">
-            <div *ngFor="let line of element.options.split('\n'); index as i" [attr.data-index]="i" className="form-check">
-              <ol>
+            <ol>
+              <div *ngFor="let line of element.options.split('\n'); index as i" [attr.data-index]="i"
+                   className="form-check">
                 <li *ngIf="element.sAnswerList.indexOf(i) != -1">{{line}}</li>
-              </ol>
-            </div>
+              </div>
+            </ol>
+          </div>
+        </div>
+      </div>
+
+      <div *ngSwitchCase="'SELECT'">
+        <div class="form-group row">
+          <label class="col-sm-2 col-form-label"
+                 id="T{{topicId}}Elem{{element.orderno}}Label">{{element.label}}</label>
+          <div class="col-sm-10">
+            <ol>
+              <div *ngFor="let line of element.options.split('\n'); index as i" [attr.data-index]="i"
+                   className="form-check">
+                <li *ngIf="element.sAnswerList.indexOf(i) != -1">{{line}}</li>
+              </div>
+            </ol>
           </div>
         </div>
       </div>
@@ -49,9 +65,6 @@
           </div>
         </div>
       </div>
-
-
-
 
 
       <div *ngSwitchCase="'TEXTAREA'">
